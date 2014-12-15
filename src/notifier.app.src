@@ -1,0 +1,11 @@
+{application, notifier,
+ [
+  {description, "The notifier system makes it possible to create modular components with pluggable interface"},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {env, []}
+ ]}.
