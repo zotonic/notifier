@@ -127,9 +127,15 @@ detach(Name, Event, Observer) ->
 get_observers(Name, Msg) when is_tuple(Msg) ->
     get_observers(Name, element(1, Msg));
 get_observers(Name, Event) ->
-    case ets:lookup(Name, Event) of
-        [] -> [];
-        [{Event, Observers}] -> Observers
+    case ets:info(Name, name) of
+        undefined -> 
+            lager:warning("Notifier ~p not started.", [Name]),
+            [];
+        _ -> 
+            case ets:lookup(Name, Event) of
+                [] -> [];
+                [{Event, Observers}] -> Observers
+            end
     end.
 
 
